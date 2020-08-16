@@ -16,6 +16,7 @@ const styles=StyleSheet.create({
         backgroundColor:greenColor,
         width:'100%',
         marginTop:40,
+    
         height:'100%',
         justifyContent:'center',
         alignItems:'center',

@@ -32,7 +32,15 @@ const Login=({navigation})=>{
 
                     </TouchableOpacity>
                 <CustomTouchable title="LOGIN" onPress={()=>console.log('login button pressed')}/>
+                <View style={styles.signupLinkContainer}>
+                    <Text style={{color:'grey'}}>Don't have an account? </Text>
+                <TouchableOpacity style={styles.signupLink}>
+                    <Text style={{color:greenColor,fontWeight:'bold'}}>  Register here</Text>
+                    </TouchableOpacity>
+                 </View>
+               
             </View>
+
             </View>
         </View>
     )
@@ -81,6 +89,13 @@ const styles=StyleSheet.create({
             width:'70%',
             alignItems:'flex-end',
 
+        },
+        signupLinkContainer:{
+           
+            flexDirection:'row',
+            position:'relative',
+            top:'14%',
+            width:'70%'
         }
 
 })
