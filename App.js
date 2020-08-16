@@ -20,16 +20,18 @@ import Login from './screens/Login';
 import Signup from './screens/Signup';
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-
+import {Provider as PaperProvider} from 'react-native-paper';
 const AuthStack=createStackNavigator();
 const App = () => {
    return (
+     
        <NavigationContainer>
          <AuthStack.Navigator >
            <AuthStack.Screen name="Login" component={Login} options={{headerShown:false}}/>
            <AuthStack.Screen name="Signup" component={Signup} options={{headerShown:false}}/>
          </AuthStack.Navigator>
        </NavigationContainer>
+   
   );
 };
 
