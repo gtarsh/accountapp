@@ -26,7 +26,7 @@ const App = () => {
    return (
      
        <NavigationContainer>
-         <AuthStack.Navigator >
+         <AuthStack.Navigator initialRouteName="Signup">
            <AuthStack.Screen name="Login" component={Login} options={{headerShown:false}}/>
            <AuthStack.Screen name="Signup" component={Signup} options={{headerShown:false}}/>
          </AuthStack.Navigator>

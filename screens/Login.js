@@ -94,8 +94,9 @@ const styles=StyleSheet.create({
            
             flexDirection:'row',
             position:'relative',
-            top:'14%',
-            width:'70%'
+            top:'10%',
+            width:'70%',
+            justifyContent:'space-between'
         }
 
 })
