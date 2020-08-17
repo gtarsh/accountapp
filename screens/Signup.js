@@ -26,7 +26,7 @@ const Login=({navigation})=>{
                 <CustomTouchable title="REGISTER" onPress={()=>console.log('Register button pressed')}/>
                 <View style={styles.signupLinkContainer}>
                     <Text style={{color:'grey'}}>Already have an account? </Text>
-                <TouchableOpacity style={styles.signupLink}>
+                <TouchableOpacity style={styles.signupLink} onPress={()=>navigation.goBack()}>
                     <Text style={{color:greenColor,fontWeight:'bold'}}>Login here</Text>
                     </TouchableOpacity>
                  </View>

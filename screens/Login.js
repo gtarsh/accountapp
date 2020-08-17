@@ -34,7 +34,7 @@ const Login=({navigation})=>{
                 <CustomTouchable title="LOGIN" onPress={()=>console.log('login button pressed')}/>
                 <View style={styles.signupLinkContainer}>
                     <Text style={{color:'grey'}}>Don't have an account? </Text>
-                <TouchableOpacity style={styles.signupLink}>
+                <TouchableOpacity style={styles.signupLink} onPress={()=>navigation.navigate('Signup')}>
                     <Text style={{color:greenColor,fontWeight:'bold'}}>  Register here</Text>
                     </TouchableOpacity>
                  </View>
