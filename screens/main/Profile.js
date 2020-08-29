@@ -7,11 +7,7 @@ import {TextInput} from 'react-native-paper';
 const Profile = ({navigation})=>{
     return(
         <View style={styles.container}>    
-            <TouchableOpacity style={styles.floatingActionButton}>
-           <View>
-            <Foundation name="pencil" color="#ffffff" size={30}></Foundation>
-           </View>
-           </TouchableOpacity>
+           
             <ScrollView showsVerticalScrollIndicator={false}>
             
         <View style={styles.ProfileContentWrapper}>
@@ -90,6 +86,11 @@ const Profile = ({navigation})=>{
                 </View>
             </View>
             </ScrollView>
+            <TouchableOpacity style={styles.floatingActionButton} onPress={()=>navigation.navigate('ProfileStackScreen')}>
+           <View>
+            <Foundation name="pencil" color="#ffffff" size={30}></Foundation>
+           </View>
+           </TouchableOpacity>
         </View>
     )
 }

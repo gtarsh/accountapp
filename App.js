@@ -27,14 +27,16 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import HomeWithTabs from './screens/main/HomeWithTabs';
 import {greenColor} from './Common';
+import ProfileStackScreen from './screens/main/ProfileStackScreen';
 const AuthStack=createStackNavigator();
 const Drawer=createDrawerNavigator();
 
 const DrawerHome=({navigation})=>{
   const MainStack=createStackNavigator();
   return(
-    <MainStack.Navigator screenOptions={{headerTitle:({children})=><Fontisto name="sentry" size={30} color={greenColor}/>,headerLeft:()=><TouchableWithoutFeedback onPress={()=>navigation.openDrawer()}><View style={{paddingLeft:20}}><AntDesign name="menufold" color="#000000" size={30} /></View></TouchableWithoutFeedback>}}>
-                <MainStack.Screen name="Home" component={HomeWithTabs}/>
+    <MainStack.Navigator>
+      <MainStack.Screen name="Home" component={HomeWithTabs}  options={{headerTitle:({children})=><Fontisto name="sentry" size={30} color={greenColor}/>,headerLeft:()=><TouchableWithoutFeedback onPress={()=>navigation.openDrawer()}><View style={{paddingLeft:20}}><AntDesign name="menufold" color="#000000" size={30} /></View></TouchableWithoutFeedback>}}/>
+      <MainStack.Screen name="ProfileStackScreen" component={ProfileStackScreen} options={{headerShown:false}}/>
     </MainStack.Navigator>
   )
 }

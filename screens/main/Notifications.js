@@ -12,7 +12,9 @@ const Notifications= ({navigation})=>{
                 <AntDesign name="notification" color={'#ffffff'}  size={30}/>
                 </View>
                 <View style={styles.notificationData}>
+                    <View style={styles.headingContainer}>
                     <Text style={styles.notificationheading}>This is notification title</Text>
+                    </View>
                     <Text style={styles.notificationDescription}>
                         this is description of the notification
                     </Text>
@@ -118,14 +120,21 @@ const styles=StyleSheet.create({
     notificationData:{
         marginLeft:15
     },
+    headingContainer:{
+        
+        width:'90%'
+    },
     notificationheading:{
         fontSize:20,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        
+        width:'100%'
     },
     notificationDescription:{
         fontSize:18,
         opacity:0.6,
-        marginVertical:5
+        marginVertical:5,
+        width:'90%'
     },
     notificationTime:{
         opacity:0.4,
