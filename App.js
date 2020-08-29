@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 import 'react-native-gesture-handler';
-import React from 'react';
+import React,{useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -21,15 +21,38 @@ import Signup from './screens/Signup';
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Provider as PaperProvider} from 'react-native-paper';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import HomeWithTabs from './screens/main/HomeWithTabs';
+import {greenColor} from './Common';
 const AuthStack=createStackNavigator();
+const MainStack=createStackNavigator();
+
 const App = () => {
+  const [isSignedIn,setIsSignedIn]=useState(true);
    return (
      
        <NavigationContainer>
-         <AuthStack.Navigator initialRouteName="Login">
+         {
+            isSignedIn?(
+              <>
+              <MainStack.Navigator screenOptions={{headerTitle:()=><Fontisto name="sentry" size={30} color={greenColor}/>,headerLeft:()=><View style={{paddingLeft:20}}><AntDesign name="menufold" color="#000000" size={30} /></View>}}>
+                <MainStack.Screen name="Home" component={HomeWithTabs}/>
+
+              </MainStack.Navigator>
+    
+              </>
+            ):(
+                <>
+          <AuthStack.Navigator initialRouteName="Login">
            <AuthStack.Screen name="Login" component={Login} options={{headerShown:false}}/>
            <AuthStack.Screen name="Signup" component={Signup} options={{headerShown:false}}/>
          </AuthStack.Navigator>
+          
+                </>
+              )
+         }
+         
        </NavigationContainer>
    
   );

@@ -9,6 +9,7 @@ const height='5%';
 const Login=({navigation})=>{
     return(
         <ScrollView contentContainerStyle={[{height:'100%'},styles.container]} >
+            
             <View style={styles.logoContainer}>
             <Logo/>
             </View>
