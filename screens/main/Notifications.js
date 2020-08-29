@@ -33,7 +33,7 @@ const Notifications= ({navigation})=>{
                 
             </View>
 
-            <View style={[styles.notificationContainer,{borderLeftColor:(data.read)?'#ffffff':greenColor}]}>
+            <View style={[styles.notificationContainer,{borderLeftColor:(data.read?'#ffffff':greenColor)}]}>
                 <View style={styles.notificationCircle}>
                 <AntDesign name="notification" color={'#ffffff'}  size={30}/>
                 </View>
@@ -125,8 +125,7 @@ const styles=StyleSheet.create({
     notificationDescription:{
         fontSize:18,
         opacity:0.6,
-        marginVertical:5,
-        width:'80%'
+        marginVertical:5
     },
     notificationTime:{
         opacity:0.4,

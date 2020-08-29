@@ -14,20 +14,30 @@ import {
   View,
   Text,
   StatusBar,
+  TouchableWithoutFeedback
 } from 'react-native';
 
 import Login from './screens/Login';
 import Signup from './screens/Signup';
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import {Provider as PaperProvider} from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import HomeWithTabs from './screens/main/HomeWithTabs';
 import {greenColor} from './Common';
 const AuthStack=createStackNavigator();
-const MainStack=createStackNavigator();
+const Drawer=createDrawerNavigator();
 
+const DrawerHome=({navigation})=>{
+  const MainStack=createStackNavigator();
+  return(
+    <MainStack.Navigator screenOptions={{headerTitle:({children})=><Fontisto name="sentry" size={30} color={greenColor}/>,headerLeft:()=><TouchableWithoutFeedback onPress={()=>navigation.openDrawer()}><View style={{paddingLeft:20}}><AntDesign name="menufold" color="#000000" size={30} /></View></TouchableWithoutFeedback>}}>
+                <MainStack.Screen name="Home" component={HomeWithTabs}/>
+    </MainStack.Navigator>
+  )
+}
 const App = () => {
   const [isSignedIn,setIsSignedIn]=useState(true);
    return (
@@ -36,11 +46,10 @@ const App = () => {
          {
             isSignedIn?(
               <>
-              <MainStack.Navigator screenOptions={{headerTitle:()=><Fontisto name="sentry" size={30} color={greenColor}/>,headerLeft:()=><View style={{paddingLeft:20}}><AntDesign name="menufold" color="#000000" size={30} /></View>}}>
-                <MainStack.Screen name="Home" component={HomeWithTabs}/>
-
-              </MainStack.Navigator>
-    
+              <Drawer.Navigator>
+                <Drawer.Screen name="Home" component={DrawerHome}/>
+              </Drawer.Navigator>
+             
               </>
             ):(
                 <>

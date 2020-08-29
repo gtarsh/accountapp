@@ -1,72 +1,41 @@
-import React from 'react';
-import { View , Text , StyleSheet , ScrollView} from 'react-native';
+import React,{useState} from 'react';
+import { View , Text , StyleSheet , ScrollView , TouchableHighlight , Image} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const NewsScreen=({navigation})=>{
+    const [data,setData]=useState([1,2,3,4])
     return(
         <View style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.newsWrapper}>
+            {
+                data.map((value,index)=>(
+                    <View style={styles.newsWrapper} key={index}>
                  <View style={styles.header}>
                  <View style={styles.circle}>
                     <MaterialCommunityIcons name="newspaper" size={30} color="#ffffff"/>
                  </View>
                  <View style={styles.titleContainer}>
-                    <Text style={styles.title}>News Title</Text>
+                     <View style={styles.titleTextContainer}>
+                     <Text style={styles.title}>Working from home may prove 'taxing':Here's Why</Text>
+                         </View>
+                    
                     <Text style={styles.newsOwner}>ABC News</Text>
                     <Text style={styles.time}>1 day ago</Text>
                  </View>
                  </View>
                 <View style={styles.body}>
                     <View style={styles.description}>
-                     <Text> news description in the form of a paragraph that can automatically adjust according to the size of its box</Text>
+                     <Text>As professionals work from home, salary components such as conveyance allowance can no longer be tax-free, in the given pandemic situation.</Text>
                     </View>
                     <View style={styles.imageContainer}>
                         <View style={styles.image}>
-                            <MaterialCommunityIcons name="image" size={50} color="#ffffff"/>
+                         <Image source={require('../../assets/tax.png')} style={{width:'100%',height:'100%'}}/>
                         </View>
                     </View>
                 </View>
 
             </View>
-
-            <View style={styles.newsWrapper}>
-                 <View style={styles.header}>
-                 <View style={styles.circle}>
-                    <MaterialCommunityIcons name="newspaper" size={30} color="#ffffff"/>
-                 </View>
-                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>News Title</Text>
-                    <Text style={styles.newsOwner}>ABC News</Text>
-                    <Text style={styles.time}>1 day ago</Text>
-                 </View>
-                 </View>
-                <View style={styles.body}>
-                    <View style={styles.description}>
-                     <Text> news description in the form of a paragraph that can automatically adjust according to the size of its box</Text>
-                    </View>
-                   
-                </View>
-
-            </View>
-
-            <View style={styles.newsWrapper}>
-                 <View style={styles.header}>
-                 <View style={styles.circle}>
-                    <MaterialCommunityIcons name="newspaper" size={30} color="#ffffff"/>
-                 </View>
-                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>News Title</Text>
-                    <Text style={styles.newsOwner}>ABC News</Text>
-                    <Text style={styles.time}>1 day ago</Text>
-                 </View>
-                 </View>
-                <View style={styles.body}>
-                    <View style={styles.description}>
-                     <Text> news description in the form of a paragraph that can automatically adjust according to the size of its box</Text>
-                    </View>
-                </View>
-
-            </View>
+                ))
+            } 
             </ScrollView>
         </View>
     )
@@ -97,7 +66,8 @@ const styles=StyleSheet.create({
     header:{
         flexDirection:'row',
         paddingTop:20,
-        paddingLeft:15        
+        paddingLeft:15,
+                
     },
     circle:{
         width:60,
@@ -108,8 +78,15 @@ const styles=StyleSheet.create({
         justifyContent:'center',
         alignItems:'center'
     }, 
+    titleTextContainer:{
+           
+            width:'85%'
+    },
     title:{
-        fontSize:20,
+        fontSize:18,
+    
+       
+       
     },
     newsOwner:{
         opacity:0.6
