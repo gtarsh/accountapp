@@ -108,7 +108,7 @@ const styles=StyleSheet.create({
         height:70,
         borderRadius:35,
         backgroundColor:greenColor,
-        zIndex:10
+        zIndex:100
     },
 
     ProfileContentWrapper:{
