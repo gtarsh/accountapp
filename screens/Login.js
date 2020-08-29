@@ -9,7 +9,7 @@ const height='5%';
 const Login=({navigation})=>{
     return(
         <View style={styles.container}>
-        
+         
             <View style={styles.logoContainer}>
             <Logo/>
             </View>

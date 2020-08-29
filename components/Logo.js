@@ -4,7 +4,7 @@ import {greenColor} from '../Common';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
 const Logo=()=>{
-    return(
+    return( 
             <View style={styles.container}>
            <Fontisto name="sentry" size={55} color="#ffffff"/>
             </View>
