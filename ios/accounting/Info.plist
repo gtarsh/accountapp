@@ -4,6 +4,14 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Foundation.ttf</string>
+		<string>FontAwesome5_Solid.ttf</string>
+		<string>Fontisto.ttf</string>
+		<string>MaterialIcons.ttf</string>
+		<string>MaterialCommunityIcons.ttf</string>
+		<string>FontAwesome5.ttf</string>
+		<string>AntDesign.ttf</string>
+		<string>Entypo.ttf</string>
 		<string>Fontisto.ttf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
