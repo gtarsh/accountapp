@@ -1,12 +1,16 @@
-import React from 'react';
-import { View , Text , StyleSheet , TouchableOpacity} from 'react-native';
-import {CommonStyles,greenColor} from '../Common';
+import React,{useState} from 'react';
+import { View , Text , StyleSheet , TouchableOpacity , Alert } from 'react-native';
+import { CommonStyles , greenColor , saveToken , backend } from '../Common';
 import {TextInput} from 'react-native-paper';
 import CustomTouchable from '../components/CustomTouchable';
 import Logo from '../components/Logo';
+import { isTSCallSignatureDeclaration } from '@babel/types';
 const height='5%';
 
-const Login=({navigation})=>{
+const Login=({navigation,loading,signedIn})=>{
+    const [panno,setPanno] = useState('');
+    const [password,setPassword]=useState('');
+
     return(
         <View style={styles.container}>
          
@@ -18,9 +22,9 @@ const Login=({navigation})=>{
             <Text style={styles.headingText}>Login to your account</Text>
             <View style={styles.actualContainer}>
                 <View style={{height:'10%'}}/>
-                <TextInput mode="outlined" label="Email" placeholder="Enter your email" style={styles.textInput}/>
+                <TextInput mode="outlined" label="Panno" placeholder="Enter your panno." style={styles.textInput} onChangeText={(panno)=>{setPanno(panno)}} value={panno}/>
                 <View style={{height:height}}/>
-                <TextInput mode="outlined" label="Password" placeholder="Enter your password" secureTextEntry={true} style={styles.textInput}/>
+                <TextInput mode="outlined" label="Password" placeholder="Enter your password" secureTextEntry={true} style={styles.textInput} onChangeText={(password)=>{setPassword(password)}} value={password} />
                
                 <View style={{height:height}}/>
         
@@ -31,7 +35,19 @@ const Login=({navigation})=>{
                         </Text>
 
                     </TouchableOpacity>
-                <CustomTouchable title="LOGIN" onPress={()=>console.log('login button pressed')}/>
+                <CustomTouchable title="LOGIN" onPress={async ()=>{
+                    loading(true);
+                   const result = await backend('user/login','POST',{panno,password});
+                   loading(false);
+                    if(result.error){
+                        Alert.alert(result.error); 
+                        loading(false);
+                    }
+                    else if(result.data.token){
+                    saveToken(result.data.token);
+                    signedIn();
+                    }
+                    }}/>
                 <View style={styles.signupLinkContainer}>
                     <Text style={{color:'grey'}}>Don't have an account? </Text>
                 <TouchableOpacity style={styles.signupLink} onPress={()=>navigation.navigate('Signup')}>
@@ -100,4 +116,5 @@ const styles=StyleSheet.create({
         }
 
 })
-export default Login;
+
+export default React.memo(Login);

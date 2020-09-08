@@ -1,13 +1,17 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { View , Text , StyleSheet , TouchableOpacity , ScrollView} from 'react-native';
-import {CommonStyles,greenColor} from '../Common';
+import { CommonStyles, greenColor , backend} from '../Common';
 import {TextInput} from 'react-native-paper';
 import CustomTouchable from '../components/CustomTouchable';
 import Logo from '../components/Logo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 const height='4%';
 
-const Login=({navigation})=>{
+const Login=({navigation,loading})=>{
+    const [name,setName]=useState('');
+    const [email,setEmail]=useState('');
+    const [panno,setPanno]=useState('');
+    const [password,setPassword]=useState('');
     return(
         <View style={styles.container}>
         <ScrollView>
@@ -20,13 +24,31 @@ const Login=({navigation})=>{
             <Text style={styles.headingText}>Create New Account</Text>
             <View style={styles.actualContainer}>
                 <View style={{height:'3%'}}/>
-                <TextInput mode="outlined" label="Name" placeholder="Enter your email" style={styles.textInput}/>
+                <TextInput mode="outlined" label="Name" placeholder="Enter your email" style={styles.textInput} onChangeText={(name)=>setName(name)} value={name}/>
                 <View style={{height:height}}/>
-                <TextInput mode="outlined" label="Email" placeholder="Enter your email" style={styles.textInput}/>
+                <TextInput mode="outlined" label="Email" placeholder="Enter your email" style={styles.textInput} onChangeText={(email)=>setEmail(email)}/>
                 <View style={{height:height}}/>
-                <TextInput mode="outlined" label="Password" placeholder="Enter your password" secureTextEntry={true} style={styles.textInput}/>
+                <TextInput mode="outlined" label="Panno." placeholder="Enter your panno" secureTextEntry={false} style={styles.textInput} onChangeText={(panno)=>setPanno(panno)}/>
                 <View style={{height:height}}/>
-                <TouchableOpacity onPress={()=>console.log('like i')} style={{width:'70%',height:'10%'}}>
+                <TextInput mode="outlined" label="Password" placeholder="Enter your password" secureTextEntry={true} style={styles.textInput} onChangeText={(password)=>setPassword(password)}/>
+                <View style={{height:height}}/>
+                <TouchableOpacity onPress={async ()=>{
+                    try{
+                        loading(true);
+                        const result= await backend('user/saveUser','POST',{name,email,panno,password});
+                        if(result.error){
+                            Alert.alert(result.error);
+                            loading(false); 
+                        }
+                        else{
+                            navigation.navigate('Login');
+                            loading(false);
+                        }
+                    }catch(error){
+                        console.error(error);
+                    }
+                   
+                }} style={{width:'70%',height:'10%'}}>
             <View style={styles.button}>
             <Text style={styles.text}>REGISTER</Text>
             </View>
@@ -57,7 +79,6 @@ const styles=StyleSheet.create({
         backgroundColor:greenColor
     },
     backButton:{
-    
     position:'absolute',
     top:15,
     left:20
@@ -65,7 +86,7 @@ const styles=StyleSheet.create({
     logoContainer:{
         width:'100%',
         paddingVertical:100,
-      justifyContent:'center'
+        justifyContent:'center'
     },
     loginTextContainer:{
         backgroundColor:'#F6F8F6',

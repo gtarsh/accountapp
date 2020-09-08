@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 import 'react-native-gesture-handler';
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -28,6 +28,8 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import HomeWithTabs from './screens/main/HomeWithTabs';
 import {greenColor} from './Common';
 import ProfileStackScreen from './screens/main/ProfileStackScreen';
+import LoadingScreen from './screens/LoadingScreen';
+import { checkToken } from './Common';
 const AuthStack=createStackNavigator();
 const Drawer=createDrawerNavigator();
 
@@ -40,8 +42,28 @@ const DrawerHome=({navigation})=>{
     </MainStack.Navigator>
   )
 }
+
+
 const App = () => {
-  const [isSignedIn,setIsSignedIn]=useState(true);
+  const [isLoading,setIsLoading] = useState(true);
+  const [isSignedIn,setIsSignedIn]=useState(false);
+  useEffect(()=>{
+    checkToken().then(result=>{
+      if(result===1){
+        console.log(result)
+        setIsSignedIn(true);
+        setIsLoading(false);
+      }
+      else if(result===-1){
+        setIsLoading(false);
+      }
+    })
+  },[]) 
+
+
+  if(isLoading===true){
+    return <LoadingScreen/>
+  }
    return (
      
        <NavigationContainer>
@@ -56,10 +78,13 @@ const App = () => {
             ):(
                 <>
           <AuthStack.Navigator initialRouteName="Login">
-           <AuthStack.Screen name="Login" component={Login} options={{headerShown:false}}/>
-           <AuthStack.Screen name="Signup" component={Signup} options={{headerShown:false}}/>
+           <AuthStack.Screen name="Login" options={{headerShown:false}}>
+             {props=><Login {...props} loading={(status)=>setIsLoading(status)} signedIn={()=>setIsSignedIn(true)}/>}
+           </AuthStack.Screen>
+           <AuthStack.Screen name="Signup" options={{headerShown:false}}>
+             {props=><Signup {...props} loading={(status)=>setIsLoading(status)}/>}
+             </AuthStack.Screen>
          </AuthStack.Navigator>
-          
                 </>
               )
          }
@@ -69,8 +94,5 @@ const App = () => {
   );
 };
 
-const styles = StyleSheet.create({
- 
-});
 
 export default App;
