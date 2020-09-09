@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { View , Text , StyleSheet , TouchableOpacity , ScrollView} from 'react-native';
-import { CommonStyles, greenColor , backend} from '../Common';
+import { CommonStyles, greenColor , backend , validate} from '../Common';
 import {TextInput} from 'react-native-paper';
 import CustomTouchable from '../components/CustomTouchable';
 import Logo from '../components/Logo';
@@ -32,22 +32,23 @@ const Login=({navigation,loading})=>{
                 <View style={{height:height}}/>
                 <TextInput mode="outlined" label="Password" placeholder="Enter your password" secureTextEntry={true} style={styles.textInput} onChangeText={(password)=>setPassword(password)}/>
                 <View style={{height:height}}/>
-                <TouchableOpacity onPress={async ()=>{
-                    try{
-                        loading(true);
-                        const result= await backend('user/saveUser','POST',{name,email,panno,password});
-                        if(result.error){
-                            Alert.alert(result.error);
-                            loading(false); 
-                        }
-                        else{
-                            navigation.navigate('Login');
-                            loading(false);
-                        }
-                    }catch(error){
-                        console.error(error);
-                    }
-                   
+                <TouchableOpacity onPress={ ()=>{
+                     validate({name,email,panno,password},async ()=>{
+                        try{
+                            loading(true);
+                            const result= await backend('user/saveUser','POST',{name,email,panno,password});
+                            if(result.error){
+                                Alert.alert(result.error);
+                                loading(false); 
+                            }
+                            else{
+                                navigation.navigate('Login');
+                                loading(false);
+                            }
+                        }catch(error){
+                            console.error(error);
+                        }    
+                     })
                 }} style={{width:'70%',height:'10%'}}>
             <View style={styles.button}>
             <Text style={styles.text}>REGISTER</Text>

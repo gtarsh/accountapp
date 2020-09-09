@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { View , Text , StyleSheet , TouchableOpacity , Alert } from 'react-native';
-import { CommonStyles , greenColor , saveToken , backend } from '../Common';
+import { CommonStyles , greenColor , saveToken , backend , validate } from '../Common';
 import {TextInput} from 'react-native-paper';
 import CustomTouchable from '../components/CustomTouchable';
 import Logo from '../components/Logo';
@@ -35,19 +35,22 @@ const Login=({navigation,loading,signedIn})=>{
                         </Text>
 
                     </TouchableOpacity>
-                <CustomTouchable title="LOGIN" onPress={async ()=>{
-                    loading(true);
-                   const result = await backend('user/login','POST',{panno,password});
-                   loading(false);
-                    if(result.error){
-                        Alert.alert(result.error); 
+                <CustomTouchable title="LOGIN" onPress={()=>{
+                    validate({panno,password},async ()=>{
+                        loading(true);
+                        const result = await backend('user/login','POST',{panno,password});
                         loading(false);
-                    }
-                    else if(result.data.token){
-                    saveToken(result.data.token);
-                    signedIn();
-                    }
-                    }}/>
+                         if(result.error){
+                             Alert.alert(result.error); 
+                             loading(false);
+                         }
+                         else if(result.data.token){
+                         saveToken(result.data.token);
+                         signedIn();
+                         }
+                        
+                    });
+                   }}/>
                 <View style={styles.signupLinkContainer}>
                     <Text style={{color:'grey'}}>Don't have an account? </Text>
                 <TouchableOpacity style={styles.signupLink} onPress={()=>navigation.navigate('Signup')}>
