@@ -16,7 +16,7 @@ import {
   StatusBar,
   TouchableWithoutFeedback
 } from 'react-native';
-
+import SplashScreen from 'react-native-splash-screen';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
 import { NavigationContainer } from '@react-navigation/native';
@@ -48,6 +48,7 @@ const App = () => {
   const [isLoading,setIsLoading] = useState(true);
   const [isSignedIn,setIsSignedIn]=useState(false);
   useEffect(()=>{
+    SplashScreen.hide();
     checkToken().then(result=>{
       if(result===1){
         console.log(result)

@@ -48,3 +48,15 @@ export const backend=(endpoint,method,data)=>{
         return fetch(`${baseUrl}${endpoint}`).then((response)=>response.json()).catch((error)=>console.error(error));
     }
 }
+
+export const validate=(data,callback)=>{
+    const emailexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    for(const field in data){
+        if(data[field]===''){
+            return Alert.alert(`All fields are should not be filled`);
+        }
+    }
+    if(emailexp.test(data.email)){
+           return Alert.alert('invalid email')
+    }
+}
