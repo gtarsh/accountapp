@@ -46,7 +46,7 @@ const DrawerHome=({navigation})=>{
 
 const App = () => {
   const [isLoading,setIsLoading] = useState(true);
-  const [isSignedIn,setIsSignedIn]=useState(false);
+  const [isSignedIn,setIsSignedIn]=useState(true);
   useEffect(()=>{
     SplashScreen.hide();
     checkToken().then(result=>{

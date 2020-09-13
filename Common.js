@@ -44,6 +44,15 @@ export const backend=(endpoint,method,data)=>{
              body:JSON.stringify(data)
          }).then((response)=>response.json()).catch((error)=>console.error(error));
     }
+    if(method==='PUT'){
+        return fetch(`${baseUrl}${endpoint}`,{
+            method:'PUT',
+            headers:{
+               'Content-Type':'application/json'
+            },
+            body:JSON.stringify(data)
+        }).then((response)=>response.json()).catch((error)=>console.error(error));
+   }
     else{
         return fetch(`${baseUrl}${endpoint}`).then((response)=>response.json()).catch((error)=>console.error(error));
     }

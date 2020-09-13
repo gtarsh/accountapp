@@ -11,6 +11,7 @@ const Profile = ({navigation})=>{
             <ScrollView showsVerticalScrollIndicator={false}>
             
         <View style={styles.ProfileContentWrapper}>
+            
             <View style={styles.profileCircle}>
                 <AntDesign name="user" color="#ffffff" size={55}></AntDesign>
             </View> 
