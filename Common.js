@@ -1,6 +1,7 @@
 import { StyleSheet , Alert} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 export const greenColor="#26B273";
+export let userId='';
 export const baseUrl='https://completeaccountingsolution.herokuapp.com/v1/'
 export const CommonStyles=StyleSheet.create({
     center:{
@@ -10,6 +11,8 @@ export const CommonStyles=StyleSheet.create({
     }
 });
 
+export const setUserId=async id=>await AsyncStorage.setItem('userId',id);
+export const getUserId=async id=>await AsyncStorage.getItem('userId');
 export const checkToken=async ()=>{
    try{
      const token=await AsyncStorage.getItem('userToken');
@@ -34,7 +37,6 @@ export const saveToken= async (token)=>{
 }
 
 export const backend=(endpoint,method,data)=>{
-   console.log(data);
     if(method==='POST'){
          return fetch(`${baseUrl}${endpoint}`,{
              method:'POST',
@@ -61,13 +63,11 @@ export const backend=(endpoint,method,data)=>{
 export const validate=(data,callback)=>{
     const emailexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     for(const field in data){
-        if(data[field]===''){
-            console.log(field);
+        if(data[field]==='' || data[field]===null){
             return Alert.alert(`All fields should be filled`);
         }
     }
     if(data.email){
-        console.log('email haigi aa ')
         if(!emailexp.test(data.email)){
             
             return Alert.alert('invalid email')

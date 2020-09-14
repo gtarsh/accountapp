@@ -19,6 +19,7 @@ import {
 import SplashScreen from 'react-native-splash-screen';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
+import FileTax from './screens/main/FileTax';
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -46,7 +47,7 @@ const DrawerHome=({navigation})=>{
 
 const App = () => {
   const [isLoading,setIsLoading] = useState(true);
-  const [isSignedIn,setIsSignedIn]=useState(true);
+  const [isSignedIn,setIsSignedIn]=useState(false);
   useEffect(()=>{
     SplashScreen.hide();
     checkToken().then(result=>{
@@ -71,8 +72,9 @@ const App = () => {
          {
             isSignedIn?(
               <>
-              <Drawer.Navigator>
+              <Drawer.Navigator initialRouteName="Home">
                 <Drawer.Screen name="Home" component={DrawerHome}/>
+                <Drawer.Screen name="TaxReturn" component={FileTax} options={{title:'Tax Return'}}/>
               </Drawer.Navigator>
              
               </>

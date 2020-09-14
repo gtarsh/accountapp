@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { View , Text , StyleSheet , TouchableOpacity , Alert } from 'react-native';
-import { CommonStyles , greenColor , saveToken , backend , validate } from '../Common';
+import { CommonStyles , greenColor , saveToken , backend , validate , setUserId} from '../Common';
 import {TextInput} from 'react-native-paper';
 import CustomTouchable from '../components/CustomTouchable';
 import Logo from '../components/Logo';
@@ -37,7 +37,8 @@ const Login=({navigation,loading,signedIn})=>{
                     </TouchableOpacity>
                 <CustomTouchable title="LOGIN" onPress={()=>{
                     validate({panno,password},async ()=>{
-                        loading(true);
+                        try{
+                            loading(true);
                         const result = await backend('user/login','POST',{panno,password});
                         loading(false);
                          if(result.error){
@@ -45,9 +46,15 @@ const Login=({navigation,loading,signedIn})=>{
                              loading(false);
                          }
                          else if(result.data.token){
+                        setUserId(result.data._id);
                          saveToken(result.data.token);
                          signedIn();
                          }
+                        
+                        }catch(err){
+                            console.error(err);
+                            Alert.alert('problem connecting to backend');
+                        }
                         
                     });
                    }}/>
