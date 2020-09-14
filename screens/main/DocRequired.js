@@ -121,19 +121,15 @@ const DocRequired=({navigation})=>{
             }
                 try{
                     const img=new FormData();
-                    img.append('image',uri);
-                    
                     navigation.push('Loading')
                     const userId=await getUserId();
-                    const obj=JSON.stringify({userId,onOrBefore});
+                    img.append('userId',userId)
+                    img.append('image',uri);
+                    img.append('onOrBefore',onOrBefore);  
+                    
                     const result= await fetch('https://completeaccountingsolution.herokuapp.com/v1/document/saveDocument',{
                         method:'POST',
-                        headers:{
-                            'Content-Type':'application/json'
-                        },
-                        body:{
-                          image:img,obj
-                        }
+                        body:img
                     });
                     console.log(`result is ${JSON.stringify(result)}`);
                     if(!result.error){
