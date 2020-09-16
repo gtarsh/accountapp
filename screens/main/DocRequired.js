@@ -129,6 +129,9 @@ const DocRequired=({navigation})=>{
                     
                     const result= await fetch('https://completeaccountingsolution.herokuapp.com/v1/document/saveDocument',{
                         method:'POST',
+                        headers:{
+                            'Content-Type':'multipart/form-data'
+                        },
                         body:img
                     });
                     console.log(`result is ${JSON.stringify(result)}`);

@@ -41,14 +41,16 @@ const Login=({navigation,loading,signedIn})=>{
                             loading(true);
                         const result = await backend('user/login','POST',{panno,password});
                         loading(false);
-                         if(result.error){
-                             Alert.alert(result.error); 
-                             loading(false);
+                         if(!result.error){
+                            if(result.data.token){
+                                setUserId(result.data._id);
+                                 saveToken(result.data.token);
+                                 signedIn();
+                                 }
                          }
-                         else if(result.data.token){
-                        setUserId(result.data._id);
-                         saveToken(result.data.token);
-                         signedIn();
+                         else {
+                            Alert.alert(result.error); 
+                             loading(false);
                          }
                         
                         }catch(err){
