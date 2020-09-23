@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import { View , Text ,StyleSheet , ScrollView , Alert } from 'react-native';
 import { TextInput , Button} from 'react-native-paper';
 import  { backend , validate ,getUserId} from '../../Common';
+import Loader from '../AdminScreen/Loader';
 
 const IncomeTax=({navigation})=>{
     const [incomeFromSalary,setIncomeFromSalary]=useState(null);
@@ -18,10 +19,12 @@ const IncomeTax=({navigation})=>{
     const [taxPayable,setTaxPayable] = useState(null);
     const [advanceTax,setAdvanceTax]=useState(null);
     const [tds,setTds]=useState(null);
+    // const [loader, updateLoader] = useState(false);
 
       return(
         <View style={styles.container}>
             <ScrollView>
+            {/* <Loader loader={loader} /> */}
         <Text style={styles.heading}>File Your Tax Return</Text>
         <Text style={styles.headingText}>Income tax information</Text>
 
@@ -59,12 +62,14 @@ const IncomeTax=({navigation})=>{
         <Button mode="contained" style={styles.button} onPress={ _=>{
             validate({incomeFromSalary,incomeFromHouseProperty,capitalGains,incomeFromBusiness,incomeFromOtherSources,totalIncome,deductions,valuefor80c,valuefor80d,otherDeductions,netTaxableIncome,taxPayable,advanceTax,tds},async ()=>{
                 try{
-                    navigation.push('Loading')
+                    // updateLoader(true);
                     const userId=await getUserId();
                     const result= await backend(`incomeTax/saveIncomeTax/`,'POST',{userId,incomeFromSalary,incomeFromHouseProperty,capitalGains,incomeFromBusiness,incomeFromOtherSources,totalIncome,deductions,valuefor80c,valuefor80d,otherDeductions,netTaxableIncome,taxPayable,advanceTax,tds})
+                    console.log(result)
                     if(!result.error){
                         navigation.navigate('IndustryType');                        
                         return Alert.alert('Income Tax information added succesfully');
+                        // updateLoader(false);
                     }
                     else{
                         navigation.goBack();

@@ -5,9 +5,11 @@ import {TextInput} from 'react-native-paper';
 import CustomTouchable from '../components/CustomTouchable';
 import Logo from '../components/Logo';
 import { isTSCallSignatureDeclaration } from '@babel/types';
+import AsyncStorage from '@react-native-community/async-storage';
+
 const height='5%';
 
-const Login=({navigation,loading,signedIn})=>{
+const Login=({navigation,loading,signedIn,signedIn1,signedIn2})=>{
     const [panno,setPanno] = useState('');
     const [password,setPassword]=useState('');
 
@@ -36,26 +38,52 @@ const Login=({navigation,loading,signedIn})=>{
 
                     </TouchableOpacity>
                 <CustomTouchable title="LOGIN" onPress={()=>{
-                    validate({panno,password},async ()=>{
-                        try{
-                            loading(true);
-                        const result = await backend('user/login','POST',{panno,password});
-                        loading(false);
-                         if(!result.error){
-                            if(result.data.token){
-                                setUserId(result.data._id);
-                                 saveToken(result.data.token);
-                                 signedIn();
-                                 }
-                         }
-                         else {
-                            Alert.alert(result.error); 
-                             loading(false);
-                         }
-                        
-                        }catch(err){
-                            console.error(err);
-                            Alert.alert('problem connecting to backend');
+                    validate({password},async ()=>{
+                        if (panno === 'admin@gmail.com'){
+                            try{
+                                loading(true);
+                            const result = await backend('admin/login','POST',{email:panno,password});
+                            loading(false);
+                             if(!result.error){
+                                if(result.data.token){
+                                    setUserId(result.data._id);
+                                     saveToken(result.data.token);
+                                     signedIn();
+                                     signedIn1();
+                                     }
+                             }
+                             else {
+                                Alert.alert(result.error); 
+                                 loading(false);
+                             }
+                            
+                            }catch(err){
+                                console.error(err);
+                                Alert.alert('problem connecting to backend');
+                            }
+                        }
+                        else{
+                            try{
+                                loading(true);
+                            const result = await backend('user/login','POST',{panno,password});
+                            loading(false);
+                             if(!result.error){
+                                if(result.data.token){
+                                    setUserId(result.data._id);
+                                     saveToken(result.data.token);
+                                     signedIn();
+                                     signedIn2();
+                                     }
+                             }
+                             else {
+                                Alert.alert(result.error); 
+                                 loading(false);
+                             }
+                            
+                            }catch(err){
+                                console.error(err);
+                                Alert.alert('problem connecting to backend');
+                            }
                         }
                         
                     });

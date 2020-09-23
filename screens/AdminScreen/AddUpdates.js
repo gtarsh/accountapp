@@ -2,42 +2,28 @@ import React,{useState} from 'react';
 import { View , Text ,StyleSheet , ScrollView , Alert } from 'react-native';
 import { TextInput , Button} from 'react-native-paper';
 import  { backend , validate ,getUserId} from '../../Common';
-
-const DateInfo=({navigation})=>{
-    const [dueDate,setDueDate]=useState('');
-    const [act,setAct]=useState('');
-    const [particulars,setParticulars]=useState('');
-    const [formToBeFilled,setFormToBeFilled]=useState('');
-    const [link,setLink]=useState('');
+import { StackActions } from '@react-navigation/native';
+const AddUpdates=({navigation})=>{
+      const [update,setUpdate]=useState('');
       return(
         <View style={styles.container}>
             <ScrollView>
         <Text style={styles.heading}>File Your Tax Return</Text>
-        <Text style={styles.headingText}>Date information</Text>
+        <Text style={styles.headingText}>Updates information</Text>
 
         <View style={styles.formWrapper}>
-        <TextInput label="Due date" mode="flat" style={styles.textField} value={dueDate} onChangeText={(dueDate)=>setDueDate(dueDate)}/>
-        <View style={styles.padder}/>
-        <TextInput label="Act" mode="flat" style={styles.textField} value={act} onChangeText={(act)=>setAct(act)}/>
-        <View style={styles.padder}/>
-        <TextInput label="Particulars" mode="flat" style={styles.textField} value={particulars} onChangeText={(particulars)=>setParticulars(particulars)}/>
-        <View style={styles.padder}/>
-        <TextInput label="Form to be filled" mode="flat" style={styles.textField} value={formToBeFilled} onChangeText={(formToBeFilled)=>setFormToBeFilled(formToBeFilled)}/>
-        <View style={styles.padder}/>
-        <TextInput label="Link" mode="flat" style={styles.textField} value={link} onChangeText={(link)=>setLink(link)}/>
-       
+        <TextInput label="Update" mode="flat" style={styles.textField} value={update} onChangeText={(update)=>setUpdate(update)}/>       
         </View>
         <View style={styles.padder}/>
         <Button mode="contained" style={styles.button} onPress={ _=>{
-            validate({dueDate,act,particulars,formToBeFilled,link},async ()=>{
+            validate({update},async ()=>{
                 try{
-                    // navigation.push('Loading')
+                    navigation.push('Loading')
                     const userId=await getUserId();
-                    const result= await backend(`accounting/saveAccounting/${userId}`,'POST',{dueDate,act,particulars,formToBeFilled,link})
-                    console.log(result)
+                    const result= await backend(`updates/saveUpdates/${userId}`,'POST',{userId,update})
                     if(!result.error){
-                        navigation.navigate('Esi');                        
-                        return Alert.alert('Date information added succesfully');
+                        navigation.navigate('DocRequired')
+                        return Alert.alert('Updates information added succesfully');
                     }
                     else{
                         navigation.goBack();
@@ -93,4 +79,4 @@ const styles=StyleSheet.create({
     }
 
 });
-export default DateInfo;
+export default AddUpdates;

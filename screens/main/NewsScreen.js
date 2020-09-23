@@ -67,6 +67,7 @@ const styles=StyleSheet.create({
         flexDirection:'row',
         paddingTop:20,
         paddingLeft:15,
+        // backgroundColor: 'red'
                 
     },
     circle:{
