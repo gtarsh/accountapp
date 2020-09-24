@@ -6,7 +6,6 @@ import { backend, validate, getUserId, greenColor } from '../../Common';
 
 
 const UserUpdates = ({ navigation }) => {
-    // const [data, setData] = useState([1,])
 
     useEffect(() => {
         fetchUsers()
@@ -21,11 +20,11 @@ const UserUpdates = ({ navigation }) => {
             const result = await backend('updates', {})
             let res2 = result.data
             setToData(res2)
-            console.log(Data)
+            // console.log(Data)
             updateLoader(false);
         } catch (err) {
-            // console.error(err)
-            return Alert.alert(err)
+            console.error(err)
+            // return Alert.alert(err)
         }
     }
     return (

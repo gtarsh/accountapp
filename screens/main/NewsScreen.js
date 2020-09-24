@@ -19,11 +19,11 @@ const NewsScreen = ({ navigation }) => {
             const result = await backend('news', {})
             let res2 = result.data
             setToData(res2)
-            console.log(Data)
+            // console.log(Data)
             updateLoader(false);
         } catch (err) {
-            console.error(err)
-            // return Alert.alert(err)
+            // console.error(err)
+            return Alert.alert(err)
         }
     }
 

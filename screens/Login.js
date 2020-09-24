@@ -58,7 +58,7 @@ const Login=({navigation,loading,signedIn,signedIn1,signedIn2})=>{
                              }
                             
                             }catch(err){
-                                console.error(err);
+                                // console.error(err);
                                 Alert.alert('problem connecting to backend');
                             }
                         }
@@ -81,7 +81,7 @@ const Login=({navigation,loading,signedIn,signedIn1,signedIn2})=>{
                              }
                             
                             }catch(err){
-                                console.error(err);
+                                // console.error(err);
                                 Alert.alert('problem connecting to backend');
                             }
                         }

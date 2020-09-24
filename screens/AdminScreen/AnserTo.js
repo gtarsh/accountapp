@@ -46,7 +46,7 @@ const AnserTo = ({ route, navigation }) => {
                                 try {
                                     updateLoader(true)
                                     const result = await backend(`answer/saveAnswer`, 'POST', { answer: answer,question: LastObject })
-                                    console.log(result)
+                                    // console.log(result)
                                     if (!result.error) {
                                         updateLoader(false)
                                         return Alert.alert('Answer Sent Succesfully');

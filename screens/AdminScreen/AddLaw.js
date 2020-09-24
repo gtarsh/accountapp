@@ -123,7 +123,7 @@ const AddLaw = ({ navigation }) => {
                         )
                     }
                 </TouchableOpacity>
-                <Button mode="contained" style={styles.button} onPress={async _ => {
+                <Button mode="contained" color="#26B273" style={styles.button} onPress={async _ => {
                     if (uri === '') {
                         return Alert.alert('Select an image to upload')
                     }
@@ -154,7 +154,7 @@ const AddLaw = ({ navigation }) => {
 
 
 
-                }}>Save</Button>
+                }}><Text style={{color: 'white'}}>Save</Text></Button>
                 <View style={styles.padder} />
                 <View style={styles.padder} />
                 <View style={styles.padder} />

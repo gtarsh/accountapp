@@ -19,12 +19,12 @@ const Profile = ({ navigation }) => {
             const userId=await getUserId();
             const result = await backend(`user/${userId}`, {})
             let res2 = result.data
-            console.log(result)
+            // console.log(result)
             setToData(res2)
             updateLoader(false);
         } catch (err) {
-            console.error(err)
-            // return Alert.alert(err)
+            // console.error(err)
+            return Alert.alert(err)
         }
     }
 
@@ -32,11 +32,7 @@ const Profile = ({ navigation }) => {
         <View style={styles.container}>
 
             <ScrollView showsVerticalScrollIndicator={false}>
-                {/* {(Data.length > 0) ? (
-                    Data.map((v, k) => {
-                        return ( */}
                 <View
-                    // key={k}
                     style={styles.container}>
                     <View style={styles.ProfileContentWrapper}>
 
@@ -93,15 +89,6 @@ const Profile = ({ navigation }) => {
                         </View>
                     </View>
                 </View>
-                {/* );
-                    })
-
-                ) : (
-                        <View style={styles.LoaderView}>
-                            <Loader loader={loader} />
-                        </View>
-
-                    )} */}
             </ScrollView>
             <TouchableOpacity style={styles.floatingActionButton} onPress={() => navigation.navigate('ProfileStackScreen')}>
                 <View>

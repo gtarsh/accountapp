@@ -8,9 +8,6 @@ const LawScreen = ({ navigation }) => {
     const [data, setData] = useState([1,])
 
     useEffect(() => {
-        // if (Data.length > 0){
-        //     fetchUsers()
-        // }
         fetchUsers()
     }, []);
 
@@ -26,8 +23,8 @@ const LawScreen = ({ navigation }) => {
             console.log(Data)
             updateLoader(false);
         } catch (err) {
-            console.error(err)
-            // return Alert.alert(err)
+            // console.error(err)
+            return Alert.alert(err)
         }
     }
 
@@ -110,7 +107,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingTop: 20,
         paddingLeft: 15,
-        // backgroundColor: 'red'
 
     },
     circle: {

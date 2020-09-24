@@ -18,7 +18,7 @@ const AddUpdates=({navigation})=>{
         <TextInput label="Update" mode="flat" style={styles.textField} value={update} onChangeText={(update)=>setUpdate(update)}/>       
         </View>
         <View style={styles.padder}/>
-        <Button mode="contained" style={styles.button} onPress={ _=>{
+        <Button mode="contained" color="#26B273" style={styles.button} onPress={ _=>{
             validate({update},async ()=>{
                 try{
                     updateLoader(true)
@@ -40,7 +40,7 @@ const AddUpdates=({navigation})=>{
             });
            
             
-            }}>Save Updates</Button>
+            }}><Text style={{color: 'white'}}>Save</Text></Button>
             <Loader loader={loader} />
         <View style={styles.padder}/>
         <View style={styles.padder}/>

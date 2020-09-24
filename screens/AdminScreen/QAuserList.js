@@ -24,14 +24,14 @@ const QAuserList = ({ navigation }) => {
                 return cont.questions;
             });
             let get2 = get.flat()
-            console.log(get)
+            // console.log(get)
             setToData2(get2)
 
             setToData(res2)
             // console.log(Data2)
             updateLoader(false);
         } catch (err) {
-            console.error(err)
+            // console.error(err)
             return Alert.alert(err)
         }
     }
@@ -229,3 +229,6 @@ const styles = StyleSheet.create({
     },
 })
 export default QAuserList;
+
+
+

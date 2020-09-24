@@ -34,7 +34,7 @@ const DateInfo=({navigation})=>{
                     navigation.push('Loading')
                     const userId=await getUserId();
                     const result= await backend(`accounting/saveAccounting/${userId}`,'POST',{dueDate,act,particulars,formToBeFilled,link})
-                    console.log(result)
+                    // console.log(result)
                     if(!result.error){
                         navigation.navigate('Esi');                        
                         return Alert.alert('Date information added succesfully');
