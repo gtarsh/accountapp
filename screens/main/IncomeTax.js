@@ -65,7 +65,7 @@ const IncomeTax=({navigation})=>{
                     navigation.navigate('Loading')
                     const userId=await getUserId();
                     const result= await backend(`incomeTax/saveIncomeTax/`,'POST',{userId,incomeFromSalary,incomeFromHouseProperty,capitalGains,incomeFromBusiness,incomeFromOtherSources,totalIncome,deductions,valuefor80c,valuefor80d,otherDeductions,netTaxableIncome,taxPayable,advanceTax,tds})
-                    console.log(result)
+                    // console.log(result)
                     if(!result.error){
                         navigation.navigate('IndustryType');                        
                         return Alert.alert('Income Tax information added succesfully');

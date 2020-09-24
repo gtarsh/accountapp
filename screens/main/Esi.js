@@ -66,7 +66,7 @@ const Esi=({navigation})=>{
                 try{
                     navigation.push('Loading')
                     const userId=await getUserId();
-                    const result= await backend(`/esiPfPt/saveEsiPfPt`,'POST',{userId,month,esi,pf,pt});
+                    const result= await backend(`esiPfPt/saveEsiPfPt`,'POST',{userId,month,esi,pf,pt});
                     if(!result.error){
                         navigation.navigate('Gst');                        
                         return Alert.alert('EsiPfPt information added succesfully');

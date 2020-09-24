@@ -24,6 +24,7 @@ const IndustryType=({navigation})=>{
                     navigation.push('Loading')
                     const userId=await getUserId();
                     const result= await backend(`industry/saveIndustryType`,'POST',{userId,name})
+                    console.log(result)
                     if(!result.error){
                         navigation.navigate('Penalties');                        
                         return Alert.alert('Industry information added succesfully');

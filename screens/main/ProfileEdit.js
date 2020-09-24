@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import { View , Text , StyleSheet , TouchableOpacity , ScrollView , Alert} from 'react-native';
 import Logo from '../../components/Logo';
-import {greenColor , validate , backend} from '../../Common';
+import {greenColor , validate , backend,userId} from '../../Common';
 import {TextInput,Button} from 'react-native-paper';
 import ProfilePhoto from '../../components/ProfilePhoto';
 const ProfileEdit = ({navigation})=>{
@@ -29,11 +29,11 @@ const ProfileEdit = ({navigation})=>{
                 <TextInput mode="outlined" label="Mobile No." style={styles.textField} onChangeText={(mobileno)=>setMobileNo(mobileno)} value={mobileno}/>
                 <TextInput mode="outlined" label="Password" style={styles.textField} onChangeText={(password)=>setPassword(password)} value={password}/>
                     </View>
-                    <Button style={styles.submitButton} mode="contained" onPress={() =>
+                    <Button style={styles.submitButton} color="#26B273" mode="contained" onPress={() =>
                     {
                         validate({name,panno,email,mobileno,password},async ()=>{
                             if(!uri==''){
-                                const result=await backend('user/editUser/5f5712ac086ca30024d398c8','PUT',{name,panno,email,phoneNumber:mobileno,password,image:uri});
+                                const result=await backend(`'user/editUser/5f5712ac086ca30024d398c8'`,'PUT',{name,panno,email,phoneNumber:mobileno,password,image:uri});
                                 console.log(`result with uri ${result.image}`);
                                 if(result.response===false){
                                     if(result.error){
@@ -48,26 +48,24 @@ const ProfileEdit = ({navigation})=>{
                                     return Alert.alert(result.message);
                                 }
                             }else{
-                                const result=await backend('user/editUser/5f5712ac086ca30024d398c8','PUT',{name,panno,email,phoneNumber:mobileno,password});
+                                const result=await backend(`user/editUser/${userId}`,'PUT',{name,panno,email,phoneNumber:mobileno,password});
                                     console.log(uri);
-                                 console.log(`result without uri ${result}`)
+                                 console.log(`result withuri ${result}`)
                                 if(result.response===false){
                                     if(result.error){
-                                        return Alert.alert(result.error);
+                                        return Alert.alert(`This${result.error}`);
                                     }
                                     else{
-                                        return Alert.alert(result.response.msg);
+                                        return Alert.alert(`This is ${result.response.msg}`);
                                     }
                                     }
                                     else if(result.response===true){
-                                        return Alert.alert(result.message);
+                                        return Alert.alert(`This Noy${result.message}`);
                                     }
                             }
                                 
                         })
-                    }}>
-                         Submit
-                    </Button>
+                    }}><Text style={{ color: 'white' }}>Submit</Text></Button>
                
                     <View style={styles.padder}>
                  </View>

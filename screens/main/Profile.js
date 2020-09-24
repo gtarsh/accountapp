@@ -17,10 +17,10 @@ const Profile = ({ navigation }) => {
         try {
             updateLoader(true);
             const userId=await getUserId();
-            const result = await backend(`user/:id${userId}`, {})
-            // let res2 = result.data
+            const result = await backend(`user/${userId}`, {})
+            let res2 = result.data
             console.log(result)
-            // setToData(res2)
+            setToData(res2)
             updateLoader(false);
         } catch (err) {
             console.error(err)
@@ -45,11 +45,11 @@ const Profile = ({ navigation }) => {
                         </View>
                         <View style={styles.profileTextContainer}>
                             <Text style={styles.headingText}>
-                                {/* {v.name} */}
-                                            Jhon</Text>
+                                {Data.name}
+                                            </Text>
                             <Text>
-                                {/* {v.phoneNumber} */}
-                                            852741963</Text>
+                                {Data.phoneNumber}
+                                        </Text>
                         </View>
 
                     </View>
@@ -62,7 +62,7 @@ const Profile = ({ navigation }) => {
                                     Full Name
                     </Text>
                                 <Text style={styles.text}>
-                                    John Doe
+                                {Data.name}
                     </Text>
                             </View>
                             <View style={styles.listItem}>
@@ -70,7 +70,7 @@ const Profile = ({ navigation }) => {
                                     Email
                     </Text>
                                 <Text style={styles.text}>
-                                    johndoe@gmail.com
+                                {Data.email}
                     </Text>
                             </View>
                             <View style={styles.listItem}>
@@ -78,7 +78,7 @@ const Profile = ({ navigation }) => {
                                     Mobile No.
                     </Text>
                                 <Text style={styles.text}>
-                                    +918976527679
+                                {Data.phoneNumber}
                     </Text>
                             </View>
 

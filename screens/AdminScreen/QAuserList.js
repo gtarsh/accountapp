@@ -24,11 +24,11 @@ const QAuserList = ({ navigation }) => {
                 return cont.questions;
             });
             let get2 = get.flat()
-            console.log(get.flat())
+            console.log(get)
             setToData2(get2)
 
             setToData(res2)
-            console.log(Data2)
+            // console.log(Data2)
             updateLoader(false);
         } catch (err) {
             console.error(err)
@@ -40,88 +40,81 @@ const QAuserList = ({ navigation }) => {
         <View style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 {(Data2.length > 0) ? (
-                    // Data2.map(() => {
-                    //     return (
-                            (Data.length > 0) ? (
-                                Data.map((v, l) => {
-                                    return (
-                                        <TouchableOpacity key={l} style={styles.MainView}
-                                        onPress={() => navigation.navigate('AnserTo', { v })}
-                                        >
-                                            <View style={styles.UserBox}>
-                                                <View style={styles.header}>
-                                                    <View style={styles.circle}>
-                                                        <FontAwesome name="user-circle" size={50} color="green" />
-                                                    </View>
+                    (Data.length > 0) ? (
+                        Data.map((v, l) => {
+                            return (
+                                <TouchableOpacity key={l} style={styles.MainView}
+                                    onPress={() => navigation.navigate('AnserTo', { v })}
+                                >
+                                    <View style={styles.UserBox}>
+                                        <View style={styles.header}>
+                                            <View style={styles.circle}>
+                                                <FontAwesome name="user-circle" size={50} color="green" />
+                                            </View>
 
-                                                    <View style={styles.titleTextContainer}>
-                                                        <View style={styles.titleTextLeftContainer}>
-                                                            <Text style={styles.Text0}>User Id:</Text>
-                                                        </View>
-                                                        <View style={styles.titleTextRightContainer}>
-                                                            <Text style={styles.Text}>{v._id}</Text>
-                                                        </View>
-                                                    </View>
+                                            <View style={styles.titleTextContainer}>
+                                                <View style={styles.titleTextLeftContainer}>
+                                                    <Text style={styles.Text0}>User Id:</Text>
                                                 </View>
-                                                <View style={styles.BodyContainer}>
-                                                    <View style={styles.BodyLeftContainer}>
-                                                        <View style={styles.IdViewLeft}>
-                                                            <Text style={styles.Text1}>User Name</Text></View>
-                                                    </View>
-                                                    <View style={styles.BodyRightContainer}>
-                                                        <View style={styles.PanViewRight}>
-                                                            <Text style={styles.Text}>{v.name}</Text></View>
-                                                    </View>
-                                                </View>
-                                                <View style={styles.BodyContainer}>
-                                                    <View style={styles.BodyLeftContainer}>
-                                                        <View style={styles.PanViewLeft}>
-                                                            <Text style={styles.Text1}>Pan No</Text></View>
-
-                                                    </View>
-                                                    <View style={styles.BodyRightContainer}>
-                                                        <View style={styles.EmailViewRight}>
-                                                            <Text style={styles.Text}>{v.panno}</Text></View>
-                                                    </View>
-                                                </View>
-                                                <View style={styles.BodyContainer}>
-                                                    <View style={styles.BodyLeftContainer}>
-                                                        <View style={styles.PanViewLeft}>
-                                                            <Text style={styles.Text1}>Phone No</Text></View>
-                                                    </View>
-                                                    <View style={styles.BodyRightContainer}>
-                                                        <View style={styles.PanViewRight}>
-                                                            <Text style={styles.Text}>{v.phoneNumber}</Text></View>
-                                                    </View>
-                                                </View>
-                                                <View style={styles.BodyContainer2}>
-                                                    <View style={styles.BodyLeftContainer}>
-                                                        <View style={styles.EmailViewLeft}>
-                                                            <Text style={styles.Text1}>Email </Text></View>
-                                                    </View>
-                                                    <View style={styles.BodyRightContainer}>
-                                                        <View style={styles.IdViewRight}>
-                                                            <Text style={styles.Text}>{v.email}</Text></View>
-                                                    </View>
+                                                <View style={styles.titleTextRightContainer}>
+                                                    <Text style={styles.Text}>{v._id}</Text>
                                                 </View>
                                             </View>
-                                        </TouchableOpacity>
-                                    );
-
-
-                                }
-                                )
-                            ) : (
-                                    <TouchableOpacity  style={styles.MainView}
-                                    // onPress={() => navigation.navigate('Details', { v })}
-                                    >
-                                        <View style={styles.UserBox}>
-
-                                            {/* <View style={styles.MainView2}>
-                                        <Text style={{ fontSize: 30, color: 'green' }}>No Data / User Need To Fill Complete Form</Text> */}
                                         </View>
-                                    </TouchableOpacity>
-                                )
+                                        <View style={styles.BodyContainer}>
+                                            <View style={styles.BodyLeftContainer}>
+                                                <View style={styles.IdViewLeft}>
+                                                    <Text style={styles.Text1}>User Name</Text></View>
+                                            </View>
+                                            <View style={styles.BodyRightContainer}>
+                                                <View style={styles.PanViewRight}>
+                                                    <Text style={styles.Text}>{v.name}</Text></View>
+                                            </View>
+                                        </View>
+                                        <View style={styles.BodyContainer}>
+                                            <View style={styles.BodyLeftContainer}>
+                                                <View style={styles.PanViewLeft}>
+                                                    <Text style={styles.Text1}>Pan No</Text></View>
+
+                                            </View>
+                                            <View style={styles.BodyRightContainer}>
+                                                <View style={styles.EmailViewRight}>
+                                                    <Text style={styles.Text}>{v.panno}</Text></View>
+                                            </View>
+                                        </View>
+                                        <View style={styles.BodyContainer}>
+                                            <View style={styles.BodyLeftContainer}>
+                                                <View style={styles.PanViewLeft}>
+                                                    <Text style={styles.Text1}>Phone No</Text></View>
+                                            </View>
+                                            <View style={styles.BodyRightContainer}>
+                                                <View style={styles.PanViewRight}>
+                                                    <Text style={styles.Text}>{v.phoneNumber}</Text></View>
+                                            </View>
+                                        </View>
+                                        <View style={styles.BodyContainer2}>
+                                            <View style={styles.BodyLeftContainer}>
+                                                <View style={styles.EmailViewLeft}>
+                                                    <Text style={styles.Text1}>Email </Text></View>
+                                            </View>
+                                            <View style={styles.BodyRightContainer}>
+                                                <View style={styles.IdViewRight}>
+                                                    <Text style={styles.Text}>{v.email}</Text></View>
+                                            </View>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                            );
+
+
+                        }
+                        )
+                    ) : (
+
+                            <View style={styles.UserBox}>
+                                <Text style={{ fontSize: 30, color: 'green' }}>No Data / User Need To Fill Complete Form</Text>
+                            </View>
+                        )
 
 
 
@@ -236,67 +229,3 @@ const styles = StyleSheet.create({
     },
 })
 export default QAuserList;
-
-// {
-//     <TouchableOpacity key={k} style={styles.MainView}
-//                                 onPress={() => navigation.navigate('Details', { v })}
-//                             >
-//                                 <View style={styles.UserBox}>
-//                                     <View style={styles.header}>
-//                                         <View style={styles.circle}>
-//                                             <FontAwesome name="user-circle" size={50} color="green" />
-//                                         </View>
-
-//                                         <View style={styles.titleTextContainer}>
-//                                             <View style={styles.titleTextLeftContainer}>
-//                                                 <Text style={styles.Text0}>User Id:</Text>
-//                                             </View>
-//                                             <View style={styles.titleTextRightContainer}>
-//                                                 <Text style={styles.Text}>{v._id}</Text>
-//                                             </View>
-//                                         </View>
-//                                     </View>
-//                                     <View style={styles.BodyContainer}>
-//                                         <View style={styles.BodyLeftContainer}>
-//                                             <View style={styles.IdViewLeft}>
-//                                                 <Text style={styles.Text1}>User Name</Text></View>
-//                                         </View>
-//                                         <View style={styles.BodyRightContainer}>
-//                                             <View style={styles.PanViewRight}>
-//                                                 <Text style={styles.Text}>{v.name}</Text></View>
-//                                         </View>
-//                                     </View>
-//                                     <View style={styles.BodyContainer}>
-//                                         <View style={styles.BodyLeftContainer}>
-//                                             <View style={styles.PanViewLeft}>
-//                                                 <Text style={styles.Text1}>Pan No</Text></View>
-
-//                                         </View>
-//                                         <View style={styles.BodyRightContainer}>
-//                                             <View style={styles.EmailViewRight}>
-//                                                 <Text style={styles.Text}>{v.panno}</Text></View>
-//                                         </View>
-//                                     </View>
-//                                     <View style={styles.BodyContainer}>
-//                                         <View style={styles.BodyLeftContainer}>
-//                                             <View style={styles.PanViewLeft}>
-//                                                 <Text style={styles.Text1}>Phone No</Text></View>
-//                                         </View>
-//                                         <View style={styles.BodyRightContainer}>
-//                                             <View style={styles.PanViewRight}>
-//                                                 <Text style={styles.Text}>{v.phoneNumber}</Text></View>
-//                                         </View>
-//                                     </View>
-//                                     <View style={styles.BodyContainer2}>
-//                                         <View style={styles.BodyLeftContainer}>
-//                                             <View style={styles.EmailViewLeft}>
-//                                                 <Text style={styles.Text1}>Email </Text></View>
-//                                         </View>
-//                                         <View style={styles.BodyRightContainer}>
-//                                             <View style={styles.IdViewRight}>
-//                                                 <Text style={styles.Text}>{v.email}</Text></View>
-//                                         </View>
-//                                     </View>
-//                                 </View>
-//                             </TouchableOpacity>
-// }

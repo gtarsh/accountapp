@@ -13,6 +13,7 @@ export default function Details({ route, navigation }) {
     let datagst = gstdata[gstdata.length - 1]
     let penaltie = v.penalties
     let datapenaltie = penaltie[penaltie.length - 1]
+    console.log(datapenaltie)
 
     return (
         <View style={styles.container}>
@@ -28,7 +29,7 @@ export default function Details({ route, navigation }) {
                                             (penaltie.length > 0) ? (
                                                 // penaltie.map((v,m ) => {
                                                 //     return (
-                                                        <View key={l} style={styles.MainView}>
+                                                        <View  style={styles.MainView}>
                                                             <View style={styles.padder} />
                                                             <View style={styles.NameView}>
                                                                 <View style={styles.LeftView}>
