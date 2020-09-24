@@ -140,7 +140,9 @@ const AddNews = ({ navigation }) => {
                             body: img
                         });
                         if (!result.error) {
+                            console.log(result)
                             return Alert.alert('News uploaded succesfully');
+                            
                         }
                         else {
                             return Alert.alert(result.error)

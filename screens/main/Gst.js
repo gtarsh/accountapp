@@ -74,7 +74,7 @@ const Gst=({navigation})=>{
         <View style={styles.padder}/>
         </View>
         <View style={styles.padder}/>
-        <Button mode="contained" style={styles.button} onPress={ _=>{
+        <Button mode="contained" color="#26B273" style={styles.button} onPress={ _=>{
             console.log(purchases);
             validate({dateOfFilling,...salesReported,...purchases,...electronicCashLedger,...electronicCreditLedger},async ()=>{
                 try{
@@ -97,7 +97,7 @@ const Gst=({navigation})=>{
             });
            
             
-            }}>Next</Button>
+            }}> <Text style={{color: 'white'}}>Next</Text></Button>
         <View style={styles.padder}/>
         <View style={styles.padder}/>
         <View style={styles.padder}/>

@@ -5,8 +5,10 @@ import AddLaw from '../AdminScreen/AddLaw';
 import AddNews from '../AdminScreen/AddNews';
 import AdminDash from '../AdminScreen/AdminDash';
 import UserList from '../AdminScreen/UserList'
-import Updates from './Updates';
-import Details from '../AdminScreen/Details'
+import AddUpdates from '../AdminScreen/AddUpdates';
+import Details from '../AdminScreen/Details';
+import QAuserList from '../AdminScreen/QAuserList'
+import AnserTo from '../AdminScreen/AnserTo'
 
 const Stack = createStackNavigator();
 
@@ -21,7 +23,9 @@ const MiddleStack = ({ navigation, identification }) => {
             <Stack.Screen name="AddLaw" component={AddLaw} />
             <Stack.Screen name="AddNews" component={AddNews} />
             <Stack.Screen name="UserList" component={UserList} />
-            <Stack.Screen name="Updates" component={Updates} />
+            <Stack.Screen name="AddUpdates" component={AddUpdates} />
+            <Stack.Screen name="QAuserList" component={QAuserList} />
+            <Stack.Screen name="AnserTo" component={AnserTo} />
 
         </Stack.Navigator >
     )

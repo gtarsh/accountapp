@@ -1,8 +1,8 @@
 import React,{useState} from 'react';
 import { View , Text ,StyleSheet , ScrollView , Alert } from 'react-native';
 import { TextInput , Button} from 'react-native-paper';
-import  { backend , validate , getUserId} from '../../Common';
-
+import  { backend , validate , getUserId,greenColor} from '../../Common';
+// import {} from '../../Common';
 const FileTaxScreen=({navigation})=>{
     const [fromDate,setFromDate]=useState('');
     const [toDate,setToDate]=useState('');
@@ -40,7 +40,7 @@ const FileTaxScreen=({navigation})=>{
         <TextInput label="Bank Balance" keyboardType="decimal-pad" mode="flat" style={styles.textField} value={bankBalance} onChangeText={(bankBalance)=>setBankBalance(bankBalance)}/>
         </View>
         <View style={styles.padder}/>
-        <Button mode="contained" style={styles.button} onPress={ _=>{
+        <Button mode="contained"  color="#26B273" style={styles.button} onPress={ _=>{
             validate({fromDate,toDate,saleOfGoods,stockPurchases,expenses,grossProfit,netProfit,cashBalance,bankBalance},async ()=>{
                 try{
                     navigation.navigate('Loading')
@@ -64,7 +64,9 @@ const FileTaxScreen=({navigation})=>{
             });
            
             
-            }}>Next</Button>
+            }}>
+                <Text style={{color: 'white'}}>Next</Text>
+                </Button>
         <View style={styles.padder}/>
         <View style={styles.padder}/>
         <View style={styles.padder}/>
@@ -102,7 +104,9 @@ const styles=StyleSheet.create({
     button:{
         width:'90%',
         alignSelf:'center',
-        padding:5
+        padding:5,
+        // backgroundColor:"#26B273",
+        // color: '#26B273'
     }
 
 });

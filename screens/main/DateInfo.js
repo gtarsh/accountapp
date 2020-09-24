@@ -28,10 +28,10 @@ const DateInfo=({navigation})=>{
        
         </View>
         <View style={styles.padder}/>
-        <Button mode="contained" style={styles.button} onPress={ _=>{
+        <Button mode="contained" color="#26B273" style={styles.button} onPress={ _=>{
             validate({dueDate,act,particulars,formToBeFilled,link},async ()=>{
                 try{
-                    // navigation.push('Loading')
+                    navigation.push('Loading')
                     const userId=await getUserId();
                     const result= await backend(`accounting/saveAccounting/${userId}`,'POST',{dueDate,act,particulars,formToBeFilled,link})
                     console.log(result)
@@ -51,7 +51,8 @@ const DateInfo=({navigation})=>{
             });
            
             
-            }}>Next</Button>
+            }}>
+                <Text style={{color: 'white'}}>Next</Text></Button>
         <View style={styles.padder}/>
         <View style={styles.padder}/>
         <View style={styles.padder}/>

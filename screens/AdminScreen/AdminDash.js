@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import { TextInput, Button, Searchbar } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Octicons from 'react-native-vector-icons/Octicons';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -48,26 +49,27 @@ export default function AdminDash({ navigation }) {
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.SecondViewRight}
-                    onPress={() => navigation.navigate('Updates')}
+                    onPress={() => navigation.navigate('AddUpdates')}
                     >
                         <FontAwesome5 name="edit" size={30} color="green" />
                         <Text style={styles.imgText}>Updates</Text>
                     </TouchableOpacity>
 
                 </View>
-
                 <View style={styles.MainSecondView}>
 
                     <TouchableOpacity style={styles.SecondViewLeft}
-                    onPress={() => navigation.navigate('AddLaw')}
+                    onPress={() => navigation.navigate('QAuserList')}
                     >
-                        <Text style={styles.imgText2}>GST</Text>
+                        <MaterialIcons name="question-answer" size={30} color="green" />
+                        <Text style={styles.imgText}>Q And A</Text>
                     </TouchableOpacity>
                 </View>
-                <Button mode="contained" style={styles.button} 
+                {/* <Button mode="contained" style={styles.button} 
              onPress={() =>
-             AsyncStorage.clear()}
-            >Log Out</Button>
+             AsyncStorage.clear() 
+            }
+            >Log Out</Button> */}
             </View>
 
 

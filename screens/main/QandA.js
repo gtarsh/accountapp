@@ -1,35 +1,35 @@
 import React,{useState} from 'react';
 import { View , Text ,StyleSheet , ScrollView , Alert } from 'react-native';
 import { TextInput , Button} from 'react-native-paper';
-import  { backend , validate ,getUserId} from '../../Common';
-
-const IndustryType=({navigation})=>{
-    const [name,setName]=useState('');
-    
-    
-      return(
-        <View style={styles.container}>
-            <ScrollView>
-        <Text style={styles.heading}>File Your Tax Return</Text>
-        <Text style={styles.headingText}>Industry type</Text>
+import  { backend , validate , getUserId,greenColor} from '../../Common';
+import { StackActions } from '@react-navigation/native';
+import Loader from '../AdminScreen/Loader'
+const QandA=({navigation})=>{
+    const [update,setUpdate]=useState('');
+    const [loader, updateLoader] = useState(false);
+    return(
+      <View style={styles.container}>
+          <ScrollView>
+          
+        <Text style={styles.heading}>Ask Questions</Text>
+        <Text style={styles.headingText}>Questions</Text>
 
         <View style={styles.formWrapper}>
-        <TextInput label="Name" mode="flat" style={styles.textField} value={name} onChangeText={(name)=>setName(name)}/>
-        <View style={styles.padder}/>
-      </View>
+        <TextInput label="Question" mode="flat" style={styles.textField} value={update} onChangeText={(update)=>setUpdate(update)}/>       
+        </View>
         <View style={styles.padder}/>
         <Button mode="contained" color="#26B273" style={styles.button} onPress={ _=>{
-            validate({name},async ()=>{
+            validate({update},async ()=>{
                 try{
-                    navigation.push('Loading')
+                    updateLoader(true)
                     const userId=await getUserId();
-                    const result= await backend(`industry/saveIndustryType`,'POST',{userId,name})
+                    const result= await backend(`question/saveQuestion`,'POST',{userId,question:update})
+                    // console.log(result)
                     if(!result.error){
-                        navigation.navigate('Penalties');                        
-                        return Alert.alert('Industry information added succesfully');
+                        updateLoader(false)
+                        return Alert.alert('Updates information added succesfully');
                     }
                     else{
-                        navigation.goBack();
                         return Alert.alert(result.error)
                     }
                     
@@ -40,7 +40,8 @@ const IndustryType=({navigation})=>{
             });
            
             
-            }}> <Text style={{color: 'white'}}>Next</Text></Button>
+            }}><Text style={{color: 'white'}}>Save Your Question</Text></Button>
+            <Loader loader={loader} />
         <View style={styles.padder}/>
         <View style={styles.padder}/>
         <View style={styles.padder}/>
@@ -82,4 +83,4 @@ const styles=StyleSheet.create({
     }
 
 });
-export default IndustryType;
+export default QandA;

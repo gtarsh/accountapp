@@ -3,11 +3,14 @@ import { View , Text ,StyleSheet , ScrollView , Alert } from 'react-native';
 import { TextInput , Button} from 'react-native-paper';
 import  { backend , validate ,getUserId} from '../../Common';
 import { StackActions } from '@react-navigation/native';
+import Loader from './Loader'
 const AddUpdates=({navigation})=>{
-      const [update,setUpdate]=useState('');
-      return(
-        <View style={styles.container}>
-            <ScrollView>
+    const [update,setUpdate]=useState('');
+    const [loader, updateLoader] = useState(false);
+    return(
+      <View style={styles.container}>
+          <ScrollView>
+          
         <Text style={styles.heading}>File Your Tax Return</Text>
         <Text style={styles.headingText}>Updates information</Text>
 
@@ -18,15 +21,15 @@ const AddUpdates=({navigation})=>{
         <Button mode="contained" style={styles.button} onPress={ _=>{
             validate({update},async ()=>{
                 try{
-                    navigation.push('Loading')
-                    const userId=await getUserId();
-                    const result= await backend(`updates/saveUpdates/${userId}`,'POST',{userId,update})
+                    updateLoader(true)
+                    // const userId=await getUserId();
+                    const result= await backend(`updates/saveUpdates`,'POST',{update})
+                    // console.log(result)
                     if(!result.error){
-                        navigation.navigate('DocRequired')
+                        updateLoader(false)
                         return Alert.alert('Updates information added succesfully');
                     }
                     else{
-                        navigation.goBack();
                         return Alert.alert(result.error)
                     }
                     
@@ -37,7 +40,8 @@ const AddUpdates=({navigation})=>{
             });
            
             
-            }}>Next</Button>
+            }}>Save Updates</Button>
+            <Loader loader={loader} />
         <View style={styles.padder}/>
         <View style={styles.padder}/>
         <View style={styles.padder}/>

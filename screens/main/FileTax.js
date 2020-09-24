@@ -15,10 +15,11 @@ import Penalties from './Penalties';
 import Updates from './Updates';
 import DocRequired from './DocRequired';
 import TaxFilingStart from './TaxFilingStart';
+// import Login from '../Login'
 const Stack=createStackNavigator();
 const FileTax=({navigation})=>{
     return(
-        <Stack.Navigator initialRouteName={'DocRequired'} screenOptions={{headerTitle:({children})=><Fontisto name="sentry" size={30} color={greenColor}/>,headerLeft:()=><TouchableWithoutFeedback onPress={()=>navigation.openDrawer()}><View style={{paddingLeft:20}}><AntDesign name="menufold" color="#000000" size={30} /></View></TouchableWithoutFeedback>}}>
+        <Stack.Navigator initialRouteName={'TaxFilingStart'} screenOptions={{headerTitle:({children})=><Fontisto name="sentry" size={30} color={greenColor}/>,headerLeft:()=><TouchableWithoutFeedback onPress={()=>navigation.openDrawer()}><View style={{paddingLeft:20}}><AntDesign name="menufold" color="#000000" size={30} /></View></TouchableWithoutFeedback>}}>
             <Stack.Screen name="TaxFilingStart" component={TaxFilingStart}/>
             <Stack.Screen name="FileTaxScreen" component={FileTaxScreen} />
             <Stack.Screen name="Loading" component={LoadingScreen} options={{headerShown:false}}/>
@@ -30,6 +31,7 @@ const FileTax=({navigation})=>{
             <Stack.Screen name="Penalties" component={Penalties}/>
             <Stack.Screen name="Updates" component={Updates}/>
             <Stack.Screen name="DocRequired" component={DocRequired}/>
+            {/* <Stack.Screen name="Login" component={Login}/> */}
         </Stack.Navigator>        
     )
 }

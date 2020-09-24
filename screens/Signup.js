@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { View , Text , StyleSheet , TouchableOpacity , ScrollView} from 'react-native';
+import { View , Text , StyleSheet , TouchableOpacity , ScrollView,Alert} from 'react-native';
 import { CommonStyles, greenColor , backend , validate} from '../Common';
 import {TextInput} from 'react-native-paper';
 import CustomTouchable from '../components/CustomTouchable';
@@ -37,6 +37,7 @@ const Login=({navigation,loading})=>{
                         try{
                             loading(true);
                             const result= await backend('user/saveUser','POST',{name,email,panno,password});
+                            // console.log(result)
                             if(result.error){
                                 Alert.alert(result.error);
                                 loading(false); 

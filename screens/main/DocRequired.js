@@ -115,7 +115,7 @@ const DocRequired=({navigation})=>{
 
         <TextInput label="On or Before" mode="flat" style={styles.textField} value={onOrBefore} onChangeText={(onOrBefore)=>setOnOrBefore(onOrBefore)}/>       
         <View style={styles.padder}/>
-        <Button mode="contained" style={styles.button} onPress={async _=>{
+        <Button mode="contained" color="#26B273" style={styles.button} onPress={async _=>{
             if(uri===''){
                 return Alert.alert('Select an image to upload')
             }
@@ -151,7 +151,8 @@ const DocRequired=({navigation})=>{
             
            
             
-            }}>upload doc</Button>
+            }}>
+             <Text style={{color: 'white'}}>Upload Doc</Text></Button>
         <View style={styles.padder}/>
         <View style={styles.padder}/>
         <View style={styles.padder}/>

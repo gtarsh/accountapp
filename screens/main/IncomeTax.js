@@ -59,17 +59,16 @@ const IncomeTax=({navigation})=>{
        
         </View>
         <View style={styles.padder}/>
-        <Button mode="contained" style={styles.button} onPress={ _=>{
+        <Button mode="contained" color="#26B273" style={styles.button} onPress={ _=>{
             validate({incomeFromSalary,incomeFromHouseProperty,capitalGains,incomeFromBusiness,incomeFromOtherSources,totalIncome,deductions,valuefor80c,valuefor80d,otherDeductions,netTaxableIncome,taxPayable,advanceTax,tds},async ()=>{
                 try{
-                    // updateLoader(true);
+                    navigation.navigate('Loading')
                     const userId=await getUserId();
                     const result= await backend(`incomeTax/saveIncomeTax/`,'POST',{userId,incomeFromSalary,incomeFromHouseProperty,capitalGains,incomeFromBusiness,incomeFromOtherSources,totalIncome,deductions,valuefor80c,valuefor80d,otherDeductions,netTaxableIncome,taxPayable,advanceTax,tds})
                     console.log(result)
                     if(!result.error){
                         navigation.navigate('IndustryType');                        
                         return Alert.alert('Income Tax information added succesfully');
-                        // updateLoader(false);
                     }
                     else{
                         navigation.goBack();
@@ -83,7 +82,7 @@ const IncomeTax=({navigation})=>{
             });
            
             
-            }}>Next</Button>
+            }}> <Text style={{color: 'white'}}>Next</Text></Button>
         <View style={styles.padder}/>
         <View style={styles.padder}/>
         <View style={styles.padder}/>
@@ -121,7 +120,8 @@ const styles=StyleSheet.create({
     button:{
         width:'90%',
         alignSelf:'center',
-        padding:5
+        padding:5,
+        // backgroundColor: 'red'
     }
 
 });

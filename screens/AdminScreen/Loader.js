@@ -9,7 +9,7 @@ const Loader = (props) => {
     if (props.loader === true) {
         return (
             <View style={styles.overlay} >
-                < BallIndicator color='blue' />
+                < BallIndicator color='#26B273' />
             </View>
         )
     } else {

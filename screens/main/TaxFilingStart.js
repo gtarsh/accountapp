@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { View , Text ,StyleSheet , ScrollView , Alert } from 'react-native';
-import { TextInput , Button} from 'react-native-paper';
+import { TextInput , Button, theme} from 'react-native-paper';
 import  { backend , validate ,getUserId} from '../../Common';
 
 const TaxFilingStart=({navigation})=>{
@@ -14,7 +14,8 @@ const TaxFilingStart=({navigation})=>{
         </Text>
         <Text style={styles.headingText}>click next after entering details on each page and at last you will be navigated again to this start page.
         </Text>
-        <Button onPress={()=>{navigation.navigate('FileTaxScreen')}} mode="contained" style={styles.button}>Start</Button>
+        <Button color="#26B273" theme={theme} onPress={()=>{navigation.navigate('FileTaxScreen')}} mode="contained" style={styles.button}>
+        <Text style={{color: 'white'}}>Next</Text></Button>
         </ScrollView>
     </View>
     )
@@ -50,8 +51,9 @@ const styles=StyleSheet.create({
         width:'90%',
         alignSelf:'center',
         padding:5,
-        marginTop:50
-    }
+        marginTop:50,
+        
+    },
 
 });
 export default TaxFilingStart;

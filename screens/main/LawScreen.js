@@ -4,9 +4,13 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Loader from '../AdminScreen/Loader';
 import { backend, validate, getUserId } from '../../Common';
 
-const NewsScreen = ({ navigation }) => {
+const LawScreen = ({ navigation }) => {
+    const [data, setData] = useState([1,])
 
     useEffect(() => {
+        // if (Data.length > 0){
+        //     fetchUsers()
+        // }
         fetchUsers()
     }, []);
 
@@ -16,7 +20,7 @@ const NewsScreen = ({ navigation }) => {
     async function fetchUsers() {
         try {
             updateLoader(true);
-            const result = await backend('news', {})
+            const result = await backend('laws', {})
             let res2 = result.data
             setToData(res2)
             console.log(Data)
@@ -41,16 +45,16 @@ const NewsScreen = ({ navigation }) => {
                                     </View>
                                     <View style={styles.titleContainer}>
                                         <View style={styles.titleTextContainer}>
-                                            <Text style={styles.title}>{value.newsTitle}</Text>
+                                            <Text style={styles.title}>{value.lawTitle}</Text>
                                         </View>
 
-                                        <Text style={styles.newsOwner}>News</Text>
+                                        <Text style={styles.newsOwner}>Laws</Text>
                                         <Text style={styles.time}>{value.createdAt}</Text>
                                     </View>
                                 </View>
                                 <View style={styles.body}>
                                     <View style={styles.description}>
-                                        <Text>{value.news}</Text>
+                                        <Text>{value.law}</Text>
                                     </View>
                                     <View style={styles.imageContainer}>
                                         <View style={styles.image}>
@@ -152,4 +156,4 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     }
 })
-export default NewsScreen;
+export default LawScreen;

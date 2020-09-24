@@ -29,8 +29,10 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import HomeWithTabs from './screens/main/HomeWithTabs';
 import { greenColor } from './Common';
 import ProfileStackScreen from './screens/main/ProfileStackScreen';
+import QandA from './screens/main/QandA';
 import LoadingScreen from './screens/LoadingScreen';
 import { checkToken } from './Common';
+import AsyncStorage from '@react-native-community/async-storage';
 const AuthStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -46,25 +48,31 @@ const DrawerHome = ({ navigation }) => {
   )
 }
 
-
-
-
-
-
-
-
-
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  const [isSignedIn2, setIsSignedIn2] = useState(true);
+  const [isSignedIn2, setIsSignedIn2] = useState(false);
+  const [isSignedIn3, setIsSignedIn3] = useState(false);
 
   const [isSignedIn, setIsSignedIn] = useState(false);
+  
+
+  //  const [hidePassword, setHidePassword] = useState(true);
+
+
+  // function PasswordVisible() {
+  //     icon !== false ? (setIcon(false), setIsSignedIn2(true)) : (setIcon(true), setIsSignedIn2(false))
+  // }
+
+
+
   useEffect(() => {
     SplashScreen.hide();
     checkToken().then(result => {
       if (result === 1) {
         console.log(result)
+        // AsyncStorage.clear();
+        // setIsSignedIn2(false);
         setIsSignedIn(true);
         setIsLoading(false);
       }
@@ -88,18 +96,41 @@ const App = () => {
               <>
                 <Drawer.Navigator initialRouteName="Home">
                   <Drawer.Screen name="Home" component={MiddleStack} />
-                  {/* <Drawer.Screen name="TaxReturn" component={FileTax} options={{ title: 'Tax Return' }} /> */}
                 </Drawer.Navigator>
 
               </>
 
             ) : (
-                <>
-                  <Drawer.Navigator initialRouteName="Home">
-                    <Drawer.Screen name="Home" component={DrawerHome} />
-                    <Drawer.Screen name="TaxReturn" component={FileTax} options={{ title: 'Tax Return' }} />
-                  </Drawer.Navigator>
-                </>
+                <NavigationContainer independent={true}>
+                  {isSignedIn3 ? (
+                    <>
+                      <Drawer.Navigator initialRouteName="Home">
+                        <Drawer.Screen name="Home" component={DrawerHome} />
+                        <Drawer.Screen name="TaxReturn" component={FileTax} options={{ title: 'Tax Return' }} />
+                        <Drawer.Screen name="QandA" component={QandA} options={{ title: 'QandA' }} />
+                      </Drawer.Navigator>
+                    </>
+
+
+                  ) : (
+                      <>
+                        <AuthStack.Navigator initialRouteName="Login">
+                          <AuthStack.Screen name="Login" options={{ headerShown: false }}>
+                            {props => <Login {...props} loading={(status) => setIsLoading(status)}
+                              signedIn={() => setIsSignedIn(true)}
+                              signedIn1={() => setIsSignedIn2(true)}
+                              signedIn2={() => setIsSignedIn3(true)}
+                            />}
+                          </AuthStack.Screen>
+                          <AuthStack.Screen name="Signup" options={{ headerShown: false }}>
+                            {props => <Signup {...props} loading={(status) => setIsLoading(status)} />}
+                          </AuthStack.Screen>
+                        </AuthStack.Navigator>
+                      </>
+
+                    )}
+                </NavigationContainer>
+
               )}
           </NavigationContainer>
         ) : (
@@ -109,7 +140,7 @@ const App = () => {
                   {props => <Login {...props} loading={(status) => setIsLoading(status)}
                     signedIn={() => setIsSignedIn(true)}
                     signedIn1={() => setIsSignedIn2(true)}
-                    signedIn2={() => setIsSignedIn2(false)}
+                    signedIn2={() => setIsSignedIn3(true)}
                   />}
                 </AuthStack.Screen>
                 <AuthStack.Screen name="Signup" options={{ headerShown: false }}>

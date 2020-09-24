@@ -60,7 +60,7 @@ const Esi=({navigation})=>{
         </View>
         </View>
         <View style={styles.padder}/>
-        <Button mode="contained" style={styles.button} onPress={ _=>{
+        <Button mode="contained" color="#26B273" style={styles.button} onPress={ _=>{
             
             validate({month,...esi,...pf,...pt},async ()=>{
                 try{
@@ -83,7 +83,7 @@ const Esi=({navigation})=>{
             });
            
             
-            }}>Next</Button>
+            }}> <Text style={{color: 'white'}}>Next</Text></Button>
         <View style={styles.padder}/>
         <View style={styles.padder}/>
         <View style={styles.padder}/>

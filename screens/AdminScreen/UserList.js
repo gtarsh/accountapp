@@ -11,37 +11,30 @@ const UserList = ({ navigation }) => {
     }, []);
 
     const [Data, setToData] = useState('');
+    const [Data2, setToData2] = useState('');
     const [loader, updateLoader] = useState(false);
-    const [searchQuery, setSearchQuery] = React.useState('');
-    const onChangeSearch = query => setSearchQuery(query);
 
     async function fetchUsers() {
         try {
             updateLoader(true);
             const result = await backend('user', {})
-            let response = result.data
-            console.log(response)
-            setToData(response)
+            let res2 = result.data
+            setToData(res2)
             updateLoader(false);
         } catch (err) {
-            console.error(err)
+            // console.error(err)
             return Alert.alert(err)
         }
     }
 
     return (
         <View style={styles.container}>
-            {/* <Searchbar
-                placeholder="Search"
-                onChangeText={onChangeSearch}
-                value={searchQuery}
-            /> */}
             <ScrollView showsVerticalScrollIndicator={false}>
                 {(Data.length > 0) ? (
                     Data.map((v, k) => {
                         return (
                             <TouchableOpacity key={k} style={styles.MainView}
-                                onPress={() => navigation.navigate('Details',{v})}
+                                onPress={() => navigation.navigate('Details', { v })}
                             >
                                 <View style={styles.UserBox}>
                                     <View style={styles.header}>
@@ -105,14 +98,13 @@ const UserList = ({ navigation }) => {
                     })
 
                 ) : (
-                        <View style={styles.MainView}>
+                        <View style={styles.LoaderView}>
                             <Loader loader={loader} />
                         </View>
 
                     )}
             </ScrollView>
         </View>
-
     )
 }
 
@@ -120,17 +112,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    LoaderView: {
-        height: '100%',
-        width: '100%',
-        alignSelf: 'center',
-    },
     MainView: {
-        marginTop: 50,
+        marginTop: 10,
         height: 220,
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    LoaderView: {
+        height: 100,
+        width: 100,
+        alignSelf: 'center',
+        marginTop: 300
     },
     UserBox: {
         backgroundColor: 'white',
@@ -190,7 +183,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '17%',
         flexDirection: 'row',
-        
+
     },
     BodyContainer2: {
         width: '100%',

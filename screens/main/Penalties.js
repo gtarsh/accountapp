@@ -25,14 +25,14 @@ const Penalties=({navigation})=>{
         <TextInput label="Interest" mode="flat" style={styles.textField} value={interest} onChangeText={(interest)=>setInterest(interest)}/>
         </View>
         <View style={styles.padder}/>
-        <Button mode="contained" style={styles.button} onPress={ _=>{
+        <Button mode="contained" color="#26B273" style={styles.button} onPress={ _=>{
             validate({formName,particular,penalty,interest},async ()=>{
                 try{
                     navigation.push('Loading')
                     const userId=await getUserId();
                     const result= await backend(`penalties/savePenalties`,'POST',{userId,formName,particular,penalty,interest})
                     if(!result.error){
-                        navigation.navigate('Updates');                        
+                        navigation.navigate('DocRequired');                        
                         return Alert.alert('Penalties information added succesfully');
                     }
                     else{
@@ -47,7 +47,7 @@ const Penalties=({navigation})=>{
             });
            
             
-            }}>Next</Button>
+            }}> <Text style={{color: 'white'}}>Next</Text></Button>
         <View style={styles.padder}/>
         <View style={styles.padder}/>
         <View style={styles.padder}/>
