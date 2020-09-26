@@ -9,6 +9,7 @@ import AddUpdates from '../AdminScreen/AddUpdates';
 import Details from '../AdminScreen/Details';
 import QAuserList from '../AdminScreen/QAuserList'
 import AnserTo from '../AdminScreen/AnserTo'
+import image from '../AdminScreen/image'
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ const MiddleStack = ({ navigation, identification }) => {
             <Stack.Screen name="AddUpdates" component={AddUpdates} />
             <Stack.Screen name="QAuserList" component={QAuserList} />
             <Stack.Screen name="AnserTo" component={AnserTo} />
+            <Stack.Screen name="image" component={image} />
 
         </Stack.Navigator >
     )

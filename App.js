@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
 import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
 import {
@@ -30,6 +23,7 @@ import HomeWithTabs from './screens/main/HomeWithTabs';
 import { greenColor } from './Common';
 import ProfileStackScreen from './screens/main/ProfileStackScreen';
 import QandA from './screens/main/QandA';
+import UserAnswer from './screens/main/UserAnswer'
 import LoadingScreen from './screens/LoadingScreen';
 import { checkToken } from './Common';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -50,29 +44,14 @@ const DrawerHome = ({ navigation }) => {
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
-
   const [isSignedIn2, setIsSignedIn2] = useState(false);
   const [isSignedIn3, setIsSignedIn3] = useState(false);
-
   const [isSignedIn, setIsSignedIn] = useState(false);
-  
-
-  //  const [hidePassword, setHidePassword] = useState(true);
-
-
-  // function PasswordVisible() {
-  //     icon !== false ? (setIcon(false), setIsSignedIn2(true)) : (setIcon(true), setIsSignedIn2(false))
-  // }
-
-
-
   useEffect(() => {
     SplashScreen.hide();
     checkToken().then(result => {
       if (result === 1) {
         console.log(result)
-        // AsyncStorage.clear();
-        // setIsSignedIn2(false);
         setIsSignedIn(true);
         setIsLoading(false);
       }
@@ -106,8 +85,8 @@ const App = () => {
                     <>
                       <Drawer.Navigator initialRouteName="Home">
                         <Drawer.Screen name="Home" component={DrawerHome} />
-                        <Drawer.Screen name="TaxReturn" component={FileTax} options={{ title: 'Tax Return' }} />
                         <Drawer.Screen name="QandA" component={QandA} options={{ title: 'QandA' }} />
+                        <Drawer.Screen name="UserAnswer" component={UserAnswer} options={{ title: 'Answer' }} />
                       </Drawer.Navigator>
                     </>
 

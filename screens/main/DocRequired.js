@@ -8,6 +8,7 @@ import ImagePicker from 'react-native-image-picker';
 import { StackActions } from '@react-navigation/native';
 const DocRequired=({navigation})=>{
       const [uri,setImage]=useState('');
+      const [ImageUri,setImageUri]=useState('');
       const [onOrBefore,setOnOrBefore]=useState('');
       async function selectPhoto(){
         if(Platform.OS==='ios'){
@@ -43,6 +44,7 @@ const DocRequired=({navigation})=>{
                   } 
                   else{
                       setImage(response.uri);
+                      setImage2(response.data);
                     
                   }
             })
@@ -85,6 +87,7 @@ const DocRequired=({navigation})=>{
                   } 
                   else{
                       setImage(response.uri);
+                      setImageUri(response.data);
                    
                   }
             })
@@ -120,28 +123,32 @@ const DocRequired=({navigation})=>{
                 return Alert.alert('Select an image to upload')
             }
                 try{
-                    const img=new FormData();
                     navigation.push('Loading')
                     const userId=await getUserId();
-                    img.append('userId',userId)
-                    img.append('image',uri);
-                    img.append('onOrBefore',onOrBefore);  
+                    const ImageDetails = {
+                        userId: userId,
+                        document: ImageUri,
+                        onOrBefore :onOrBefore,
+                    } 
                     
                     const result= await fetch('https://completeaccountingsolution.herokuapp.com/v1/document/saveDocument',{
                         method:'POST',
                         headers:{
-                            'Content-Type':'multipart/form-data'
-                        },
-                        body:img
+                            'Content-Type':'application/json'
+                         },
+                        body:JSON.stringify(ImageDetails)
                     });
-                    console.log(`result is ${JSON.stringify(result)}`);
+                    // console.log(`result is ${JSON.stringify(result)}`);
+                    // console.log(ImageDetails)
+                    // console.log(result)
                     if(!result.error){
                         navigation.dispatch(StackActions.popToTop());                                                
                         return Alert.alert('Document uploaded succesfully');
                     }
                     else{
-                        navigation.goBack();
+                        // navigation.goBack();
                         return Alert.alert(result.error)
+                        console.log(result.error)
                     }
                     
                 }catch(err){
